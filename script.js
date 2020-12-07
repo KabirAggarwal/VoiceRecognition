@@ -18,7 +18,7 @@ function onspeak(e){
 
     //console.log(msg);
     display_message(msg)
-   // number_verify(msg)
+    number_verify(msg)
 }
 
 function display_message(msg){
@@ -28,5 +28,39 @@ function display_message(msg){
     `
 }
 
+function number_verify(msg){
+    const num = +msg;
+    if(Number.isNaN(num)){
+        msgEl.innerHTML += `<div>Not a valid number added</div>`
+        return;
+    }
+    if(num > 100 || num < 1){
+        msgEl.innerHTML= `Number should be between (1 to 100)`
+        return;
+    }
+    if( num === rand_num){
+        document.body.innerHTML =`
+        <h2>Yippee!!! Correct number guessed .. <br><br>
+        Number was : ${msg} </h2>
+        <button class="play-again" id="play again">Play Again</button>
+
+        `
+    }
+    else if (num >rand_num){
+        msgEl.innerHTML +=`<div>Go Lower</div>`
+    }
+    else{
+        msgEl.innerHTML +=`<div>Go Higher</div>`
+    }
+}
+
 
 recognition.addEventListener('result',onspeak); 
+
+recognition.addEventListener('end',()=> recognition.start())
+
+document.body.addEventListener('click', e  => {
+    if(e.target.id == 'play-again'){
+        window.location.reload();
+    }
+})
