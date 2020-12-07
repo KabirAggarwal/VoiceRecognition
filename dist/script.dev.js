@@ -37,7 +37,7 @@ function number_verify(msg) {
   }
 
   if (num === rand_num) {
-    document.body.innerHTML = "\n        <h2>Yippee!!! Correct number guessed .. <br><br>\n        Number was : ".concat(msg, " </h2>\n        <button class=\"play-again\" id=\"play again\">Play Again</button>\n\n        ");
+    document.body.innerHTML = "\n        <h2>Yippee!!! Correct number guessed .. <br><br>\n        Number was : ".concat(num, " </h2>\n        <button class=\"play-again\" id=\"play again\">Play Again</button>");
   } else if (num > rand_num) {
     msgEl.innerHTML += "<div>Go Lower</div>";
   } else {

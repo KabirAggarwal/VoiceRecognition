@@ -7,7 +7,7 @@ function getRandomNumber(){
 const rand_num = getRandomNumber();
 console.log("number : ",rand_num)
 
-window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
 let recognition = new window.SpeechRecognition();
 
@@ -30,6 +30,7 @@ function display_message(msg){
 
 function number_verify(msg){
     const num = +msg;
+
     if(Number.isNaN(num)){
         msgEl.innerHTML += `<div>Not a valid number added</div>`
         return;
@@ -41,10 +42,8 @@ function number_verify(msg){
     if( num === rand_num){
         document.body.innerHTML =`
         <h2>Yippee!!! Correct number guessed .. <br><br>
-        Number was : ${msg} </h2>
-        <button class="play-again" id="play again">Play Again</button>
-
-        `
+        Number was : ${num} </h2>
+        <button class="play-again" id="play again">Play Again</button>`
     }
     else if (num >rand_num){
         msgEl.innerHTML +=`<div>Go Lower</div>`
@@ -54,13 +53,12 @@ function number_verify(msg){
     }
 }
 
+recognition.addEventListener('result', onspeak); 
 
-recognition.addEventListener('result',onspeak); 
-
-recognition.addEventListener('end',()=> recognition.start())
+recognition.addEventListener('end', () => recognition.start())
 
 document.body.addEventListener('click', e  => {
     if(e.target.id == 'play-again'){
         window.location.reload();
     }
-})
+});
